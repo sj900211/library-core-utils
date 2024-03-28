@@ -28,7 +28,11 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import run.freshr.common.data.UtilsData;
 
 /**
  * 암호화 Util
@@ -38,6 +42,8 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2024. 3. 26. 오후 3:01:38
  */
 @Slf4j
+@Component
+@RequiredArgsConstructor
 public class CryptoUtil {
 
   /**
@@ -46,7 +52,7 @@ public class CryptoUtil {
    * @apiNote 기본 SALT 값
    * @since 2024. 3. 26. 오후 3:01:38
    */
-  private static final String SALT = "FreshR";
+  private static String SALT = "SALT";
 
   /**
    * AES256 기본 해시 반복 수
@@ -97,6 +103,11 @@ public class CryptoUtil {
    * @since 2024. 3. 26. 오후 3:01:38
    */
   private static final String RSA_VALUE = "RSA";
+
+  @Autowired
+  public CryptoUtil(UtilsData utilsData) {
+    SALT = utilsData.getEncryptSalt();
+  }
 
   /**
    * AES256 암호화

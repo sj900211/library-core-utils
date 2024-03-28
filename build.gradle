@@ -21,6 +21,7 @@ configurations {
 repositories {
 	maven {
 		url "https://:${githubPackageRead}@maven.pkg.github.com/${githubOwner}/*"
+//    url "${nexusRepository}/maven-public/"
 	}
 	mavenCentral()
 }
@@ -41,6 +42,14 @@ dependencies {
 
 	// Jsoup
 	implementation 'org.jsoup:jsoup:1.17.2'
+
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+
+	// Jackson
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
 }
 
 test {
@@ -72,6 +81,13 @@ publishing {
 				username System.getenv("GITHUB_ACTOR")
 				password System.getenv("GITHUB_TOKEN")
 			}
+//      url = version.endsWith('SNAPSHOT')
+//              ? "${nexusRepository}/maven-snapshots/"
+//              : "${nexusRepository}/maven-releases/"
+//      credentials {
+//        username "${nexusUsername}"
+//        password "${nexusPassword}"
+//      }
 		}
 	}
 
