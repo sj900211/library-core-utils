@@ -49,6 +49,32 @@ public class JwtUtil {
    * 토큰 발급
    *
    * @param subject subject
+   * @return string
+   * @apiNote 만료 시간이 없는 토큰 발급
+   * @author FreshR
+   * @since 2024. 3. 29. 오전 9:42:31
+   */
+  public static String generate(final String subject) {
+    return generate(subject, null, null);
+  }
+
+  /**
+   * 토큰 발급
+   *
+   * @param subject subject
+   * @return string
+   * @apiNote 토큰 발급
+   * @author FreshR
+   * @since 2024. 3. 29. 오전 9:42:31
+   */
+  public static String generate(final String subject, final Long expiration) {
+    return generate(subject, expiration, null);
+  }
+
+  /**
+   * 토큰 발급
+   *
+   * @param subject subject
    * @param claims  claims
    * @return string
    * @apiNote 만료 시간이 없는 토큰 발급
