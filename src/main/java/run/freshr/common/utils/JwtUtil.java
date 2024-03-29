@@ -70,7 +70,7 @@ public class JwtUtil {
    * @author FreshR
    * @since 2024. 3. 27. 오후 2:35:01
    */
-  public static String generate(final String subject, final Integer expiration,
+  public static String generate(final String subject, final Long expiration,
       final HashMap<String, Object> claims) {
     JwtBuilder jwtBuilder = Jwts.builder()
         .header().add("typ", "JWT")
