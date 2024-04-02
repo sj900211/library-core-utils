@@ -103,7 +103,7 @@ public class JwtUtil {
         .and()
         .subject(subject)
         .issuedAt(new Date())
-        .signWith(JWT_KEY, HS512);
+        .signWith(JWT_KEY);
 
     if (!isNull(claims)) { // 토큰 Body 설정
       jwtBuilder.claims(claims);
