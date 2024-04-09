@@ -4,8 +4,10 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.modelmapper.Conditions.isNotNull;
 import static org.modelmapper.convention.MatchingStrategies.STRICT;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -64,6 +66,18 @@ public class MapperUtil {
       @Override
       protected LocalDateTime convert(String source) {
         return LocalDateTime.parse(source, ofPattern(DATE_TIME_FORMAT));
+      }
+    });
+    modelMapper.addConverter(new AbstractConverter<Long, LocalDate>() {
+      @Override
+      protected LocalDate convert(Long source) {
+        return Instant.ofEpochMilli(source).atZone(ZoneId.systemDefault()).toLocalDate();
+      }
+    });
+    modelMapper.addConverter(new AbstractConverter<Long, LocalDateTime>() {
+      @Override
+      protected LocalDateTime convert(Long source) {
+        return Instant.ofEpochMilli(source).atZone(ZoneId.systemDefault()).toLocalDateTime();
       }
     });
 

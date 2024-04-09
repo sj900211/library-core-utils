@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'run.freshr'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0.RELEASE'
 
 java {
 	sourceCompatibility = '17'
@@ -20,8 +20,8 @@ configurations {
 
 repositories {
 	maven {
-		url "https://:${githubPackageRead}@maven.pkg.github.com/${githubOwner}/*"
-//    url "${nexusRepository}/maven-public/"
+//		url "https://:${githubPackageRead}@maven.pkg.github.com/${githubOwner}/*"
+    url "${nexusRepository}/maven-public/"
 	}
 	mavenCentral()
 }
@@ -76,18 +76,18 @@ publishing {
 
 	repositories {
 		maven {
-			url = "${githubPackageMaven}/${githubOwner}/${rootProject.name}"
-			credentials {
-				username System.getenv("GITHUB_ACTOR")
-				password System.getenv("GITHUB_TOKEN")
-			}
-//      url = version.endsWith('SNAPSHOT')
-//              ? "${nexusRepository}/maven-snapshots/"
-//              : "${nexusRepository}/maven-releases/"
-//      credentials {
-//        username "${nexusUsername}"
-//        password "${nexusPassword}"
-//      }
+//			url = "${githubPackageMaven}/${githubOwner}/${rootProject.name}"
+//			credentials {
+//				username System.getenv("GITHUB_ACTOR")
+//				password System.getenv("GITHUB_TOKEN")
+//			}
+      url = version.endsWith('SNAPSHOT')
+              ? "${nexusRepository}/maven-snapshots/"
+              : "${nexusRepository}/maven-releases/"
+      credentials {
+        username "${nexusUsername}"
+        password "${nexusPassword}"
+      }
 		}
 	}
 

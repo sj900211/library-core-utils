@@ -1,6 +1,5 @@
 package run.freshr.common.utils;
 
-import static io.jsonwebtoken.Jwts.SIG.HS512;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Objects.isNull;
 import static org.springframework.util.StringUtils.hasLength;
@@ -17,7 +16,6 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.crypto.SecretKey;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import run.freshr.common.data.UtilsData;
@@ -29,7 +27,6 @@ import run.freshr.common.data.UtilsData;
  * @apiNote JWT Util
  * @since 2024. 3. 27. 오후 2:35:01
  */
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtUtil {
@@ -128,7 +125,7 @@ public class JwtUtil {
    */
   public static Claims get(final String jwt) throws JwtException {
     return Jwts.parser()
-        .decryptWith(JWT_KEY)
+        .verifyWith(JWT_KEY)
         .build()
         .parseSignedClaims(jwt)
         .getPayload();
